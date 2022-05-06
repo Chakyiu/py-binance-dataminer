@@ -20,7 +20,7 @@ services:
     image: py-binance-trading-bot_btcusdt:latest
     restart: on-failure
     environment:
-      - PRICE_TAG=BTCUSDT
+      - SYMBOL=BTCUSDT
     networks:
       - app-network
     depends_on:
