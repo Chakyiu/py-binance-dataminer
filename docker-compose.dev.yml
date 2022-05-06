@@ -1,0 +1,36 @@
+version: '3'
+services:
+  mysql:
+    container_name: crypto-mysql
+    image: mysql:8.0-oracle
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data_vol:/var/lib/mysql
+    networks:
+      - app-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=crypto
+    restart: always
+    expose:
+      - 3306
+  btcusdt:
+    container_name: btcusdt
+    build:
+      context: .
+    restart: on-failure
+    environment:
+      - PRICE_TAG=BTCUSDT
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+    links:
+      - mysql
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
+volumes:
+  mysql_data_vol:
