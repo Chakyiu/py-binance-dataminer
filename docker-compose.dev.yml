@@ -21,7 +21,7 @@ services:
       context: .
     restart: on-failure
     environment:
-      - PRICE_TAG=BTCUSDT
+      - SYMBOL=BTCUSDT
     networks:
       - app-network
     depends_on:
